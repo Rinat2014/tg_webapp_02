@@ -12,18 +12,6 @@ export default defineNuxtConfig({
     }
   },
 
-  // app: {
-  //   head: {
-  //     script: [
-  //       {
-  //         src: 'https://telegram.org/js/telegram-web-app.js?56', // подключаем в header скрипты для работы с twa
-  //         async: true,
-  //         defer: true
-  //       }
-  //     ]
-  //   }
-  // },
-
   css: ['./app/assets/css/main.css'],
 
   vite: {
@@ -45,6 +33,18 @@ export default defineNuxtConfig({
   app: {
     baseURL: '/',  
     buildAssetsDir: '/_nuxt/',
-    cdnURL: ''
-  }
+    cdnURL: '',
+    
+    head: {
+      script: [
+        {
+          src: 'https://telegram.org/js/telegram-web-app.js?56', // подключаем в header скрипты для работы с @twa-dev/sdk
+          async: true,
+          defer: true
+        }
+      ]
+    }
+
+  },
+
 })

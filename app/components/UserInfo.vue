@@ -71,15 +71,6 @@
 import { ref, onMounted, computed } from 'vue'
 
 
-useHead({
-  script: [
-    {
-      src: 'https://telegram.org/js/telegram-web-app.js?56',
-      async: true,
-      defer: true
-    }
-  ]
-})
 
 const userId = ref('')
 const userName = ref('')

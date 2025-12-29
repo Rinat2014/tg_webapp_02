@@ -12,17 +12,17 @@ export default defineNuxtConfig({
     }
   },
 
-  app: {
-    head: {
-      script: [
-        {
-          src: 'https://telegram.org/js/telegram-web-app.js?56', // подключаем в header скрипты для работы с twa
-          async: true,
-          defer: true
-        }
-      ]
-    }
-  },
+  // app: {
+  //   head: {
+  //     script: [
+  //       {
+  //         src: 'https://telegram.org/js/telegram-web-app.js?56', // подключаем в header скрипты для работы с twa
+  //         async: true,
+  //         defer: true
+  //       }
+  //     ]
+  //   }
+  // },
 
   css: ['./app/assets/css/main.css'],
 

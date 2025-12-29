@@ -1,28 +1,5 @@
 <template>
 <div>
-   <UserInfo />
+   <h1 class="text-center text-4xl p-4 bg-yellow-200">Index page</h1>
 </div>
 </template>
-
-
-
-
-
-
-
-
-
-
-
-
-<script setup>
-// useHead({
-//   script: [
-//     {
-//       src: 'https://telegram.org/js/telegram-web-app.js?56',
-//       async: true,
-//       defer: true
-//     }
-//   ]
-// })
-</script>

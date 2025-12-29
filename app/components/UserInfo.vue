@@ -173,6 +173,7 @@ const getTelegramData = () => {
   loading.value = false
 }
 
+
 // Функция для отправки сообщения в чат
 const sendMessageToChat = async (text) => {
   try {
@@ -199,8 +200,6 @@ const sendMessageToChat = async (text) => {
       throw new Error('Токен бота не настроен')
     }
 
-    // console.log('Отправка сообщения:', { chatId, text, botToken: botToken ? 'установлен' : 'отсутствует' })
-
     // Отправляем сообщение через Telegram Bot API
     const response = await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
       method: 'POST',
@@ -216,14 +215,13 @@ const sendMessageToChat = async (text) => {
     const result = await response.json()
     
     if (!result.ok) {
-      console.error('Ошибка Telegram API:', result)
+      // console.error('Ошибка Telegram API:', result)
       throw new Error(result.description || 'Ошибка отправки сообщения')
     }
 
-    // console.log('Сообщение отправлено успешно:', result)
     return result
   } catch (error) {
-    console.error('Ошибка отправки сообщения:', error)
+    // console.error('Ошибка отправки сообщения:', error)
     throw error
   }
 }
@@ -244,8 +242,8 @@ const saveAction = async () => {
       tg.close()
     }
   } catch (error) {
-    errorMessage.value = `Ошибка: ${error.message}`
-    console.error('Save error:', error)
+    errorMessage.value = `❗️ Error: ${error.message}`
+    // console.error('Save error:', error)
   } finally {
     sending.value = false
   }
@@ -267,8 +265,8 @@ const cancelAction = async () => {
       tg.close()
     }
   } catch (error) {
-    errorMessage.value = `Ошибка: ${error.message}`
-    console.error('Cancel error:', error)
+    errorMessage.value = `❗️ Error: ${error.message}`
+    // console.error('Cancel error:', error)
   } finally {
     sending.value = false
   }

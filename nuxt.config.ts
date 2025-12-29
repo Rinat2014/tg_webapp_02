@@ -4,7 +4,13 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  // ssr: false,
+  
+  runtimeConfig: {
+    public: {
+      tg_bot_token: process.env.NUXT_PUBLIC_TELEGRAM_BOT_TOKEN,
+      // apiBaseUrl: process.env.NUXT_PUBLIC_API_URL || '',
+    }
+  },
 
   css: ['./app/assets/css/main.css'],
 
@@ -13,11 +19,20 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
     server: {
-      // hmr: {
-      //   clientPort: 443, // Для работы с HTTPS-туннелем ngrok
-      // },
-      // host: true, // внешний доступ
-      allowedHosts: ['.ngrok-free.app'], // ngrok
+      // allowedHosts: ['.ngrok-free.app'], // ngrok testing
     }
   },
+
+  // Vercel
+  nitro: {
+    preset: 'vercel'
+  },
+
+  ssr: false,  // SPA
+
+  app: {
+    baseURL: '/',  
+    buildAssetsDir: '/_nuxt/',
+    cdnURL: ''
+  }
 })

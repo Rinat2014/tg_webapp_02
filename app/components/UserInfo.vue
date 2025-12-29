@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+  <div class="min-h-screen flex items-center justify-center p-4">
     <div class="max-w-sm w-full bg-white rounded-xl shadow-md p-6">
       <!-- Аватар -->
       <div class="flex justify-center mb-6">
@@ -21,15 +21,23 @@
 
       <!-- ID -->
       <div class="mb-4 text-center">
-        <p class="text-sm text-gray-500 mb-1">Telegram ID</p>
-        <p class="text-lg font-mono font-bold text-gray-800">{{ userData?.id || 'Не указан' }}</p>
+        <p class="text-sm text-gray-500">Telegram ID</p>
+        <p class="text-lg font-mono font-bold text-gray-800">{{ userData?.id || '🤷‍♂️' }}</p>
       </div>
 
       <!-- Username -->
       <div class="text-center mb-6">
-        <p class="text-sm text-gray-500 mb-1">Username</p>
+        <p class="text-sm text-gray-500">Username</p>
         <p class="text-xl font-semibold text-gray-800">
-          {{ userData?.username ? `@${userData.username}` : 'Не указан' }}
+          {{ userData?.username ? `@${userData.username}` : '🤷‍♂️' }}
+        </p>
+      </div>
+
+      <!-- chat_id -->
+      <div class="text-center mb-6">
+        <p class="text-sm text-gray-500">Username</p>
+        <p class="text-xl font-semibold text-gray-800">
+          {{ userData?.username ? `@${userData.username}` : '🤷‍♂️' }}
         </p>
       </div>
 
@@ -73,22 +81,63 @@
   </div>
 </template>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 
 const runtimeConfig = useRuntimeConfig()
+const botToken = runtimeConfig.public.tg_bot_token
+
 const userData = ref(null)
 const loading = ref(true)
 const sending = ref(false)
 const errorMessage = ref('')
 
-// Получаем инициалы для аватара
+// Получаем инициалы для аватара (если не установлено фото)
 const userInitials = computed(() => {
   if (!userData.value?.first_name) return 'TG'
   return userData.value.first_name.charAt(0).toUpperCase()
 })
 
-// Функция для получения данных из Telegram WebApp
+// Получение данных из Telegram WebApp
 const getTelegramData = () => {
   if (typeof window === 'undefined') {
     loading.value = false
@@ -143,8 +192,6 @@ const sendMessageToChat = async (text) => {
       throw new Error('Не удалось получить chat_id')
     }
 
-    // Получаем токен бота из runtimeConfig
-    const botToken = runtimeConfig.public.tg_bot_token
     
     if (!botToken) {
       throw new Error('Токен бота не настроен')

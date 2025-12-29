@@ -153,10 +153,10 @@ const userInitials = computed(() => {
 
 // Получение данных из Telegram WebApp
 const getTelegramData = () => {
-  if (typeof window === 'undefined') {
-    loading.value = false
-    return
-  }
+  // if (typeof window === 'undefined') {
+  //   loading.value = false
+  //   return
+  // }
 
   // Проверяем Telegram WebApp
   if (window.Telegram?.WebApp) {

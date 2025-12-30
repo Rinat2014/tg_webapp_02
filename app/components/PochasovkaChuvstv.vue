@@ -23,8 +23,8 @@
   
         <!-- Username + ID -->
         <div class="">          
-          <p class="text-xl font-semibold text-gray-800">{{ userData?.username ? `@${userData.username}` : 'UserName' }}</p>
-          <p class="font-mono text-gray-500">{{ userData?.id ? `ID: ${userData?.id}` : 'Telegram ID' }}</p>
+          <p class="text-xl font-semibold text-gray-800 dark:text-gray-200">{{ userData?.username ? `@${userData.username}` : 'UserName' }}</p>
+          <p class="font-mono text-gray-500 dark:text-gray-400">{{ userData?.id ? `ID: ${userData?.id}` : 'Telegram ID' }}</p>
         </div>
   
         

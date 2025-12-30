@@ -365,7 +365,8 @@ const sendMessageToChat = async (text) => {
       },
       body: JSON.stringify({
         chat_id: chatId,
-        text: text
+        text: text,
+        parse_mode: 'Markdown'
       })
     })
 

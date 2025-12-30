@@ -61,9 +61,137 @@
         </button>
       </div>
 
-      <!-- Выпадающий список -->
-      <div class="w-full px-2">
+      <!-- Позитивный аккордеон  -->
+      <div class="w-full">
+        <div class="mb-4 border border-gray-300 rounded-xl overflow-hidden shadow-sm">
+          <!-- Заголовок аккордеона -->
+          <button 
+            @click="isPositiveOpen = !isPositiveOpen"
+            class="w-full flex justify-between items-center px-4 py-2 bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-200"
+          >
+            <div class="">
+              <div class="text-left text-gray-800 text-lg">Позитивные чувства</div>
+  
+              <!-- Счетчик выбранных -->
+              <div class="text-left text-sm text-gray-500">
+                Выбрано: {{ selectedFeelsPositive.length }} из {{ PositiveMap.length }}
+              </div>
+            </div>
 
+            <svg :class="['w-6 h-6 transform transition-transform duration-300', isPositiveOpen ? 'rotate-180' : 'rotate-0']" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          
+          <!-- Контент аккордеона -->
+          <div 
+            v-if="isPositiveOpen"
+            class="p-2 bg-white border-t border-gray-200"
+          >
+            <div class="grid grid-cols-1 gap-2">
+              <label 
+                v-for="(feeling, index) in PositiveMap" 
+                :key="index"
+                class="border border-gray-50   flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-150"
+                :class="{ 'bg-blue-50 border border-blue-200': selectedFeelsPositive.includes(feeling) }"
+              >
+                <input 
+                  type="checkbox" 
+                  :value="feeling"
+                  v-model="selectedFeelsPositive"
+                  class="hidden"
+                >
+                <div 
+                  class="w-5 h-5 border-2 rounded mr-3 flex-shrink-0 transition-all duration-200"
+                  :class="[
+                    selectedFeelsPositive.includes(feeling) 
+                      ? 'bg-blue-500 border-blue-500' 
+                      : 'border-gray-300'
+                  ]"
+                >
+                  <svg 
+                    v-if="selectedFeelsPositive.includes(feeling)"
+                    class="w-full h-full text-white" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <span class="text-gray-700">{{ feeling }}</span>
+              </label>
+            </div>
+            
+            
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <!-- НЕ Позитивный аккордеон  -->
+      <div class="w-full">
+        <div class="mb-4 border border-gray-300 rounded-xl overflow-hidden shadow-sm">
+          <!-- Заголовок аккордеона -->
+          <button 
+            @click="isNegativeOpen = !isNegativeOpen"
+            class="w-full flex justify-between items-center px-4 py-2 bg-gradient-to-r from-green-50 to-blue-50 hover:from-green-100 hover:to-blue-100 transition-all duration-200"
+          >
+            <div class="">
+              <div class="text-left text-gray-800 text-lg">Не позитивные чувства</div>
+  
+              <!-- Счетчик выбранных -->
+              <div class="text-left text-sm text-gray-500">
+                Выбрано: {{ selectedFeelsNegative.length }} из {{ NePositiveMap.length }}
+              </div>
+            </div>
+
+            <svg :class="['w-6 h-6 transform transition-transform duration-300', isNegativeOpen ? 'rotate-180' : 'rotate-0']" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+          
+          <!-- Контент аккордеона -->
+          <div 
+            v-if="isNegativeOpen"
+            class="p-2 bg-white border-t border-gray-200"
+          >
+            <div class="grid grid-cols-1 gap-2">
+              <label 
+                v-for="(feeling, index) in NePositiveMap" 
+                :key="index"
+                class="border border-gray-50   flex items-center p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors duration-150"
+                :class="{ 'bg-blue-50 border border-blue-200': selectedFeelsNegative.includes(feeling) }"
+              >
+                <input 
+                  type="checkbox" 
+                  :value="feeling"
+                  v-model="selectedFeelsNegative"
+                  class="hidden"
+                >
+                <div 
+                  class="w-5 h-5 border-2 rounded mr-3 flex-shrink-0 transition-all duration-200"
+                  :class="[
+                    selectedFeelsNegative.includes(feeling) 
+                      ? 'bg-blue-500 border-blue-500' 
+                      : 'border-gray-300'
+                  ]"
+                >
+                  <svg 
+                    v-if="selectedFeelsNegative.includes(feeling)"
+                    class="w-full h-full text-white" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                  >
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+                  </svg>
+                </div>
+                <span class="text-gray-700">{{ feeling }}</span>
+              </label>
+            </div>
+            
+            
+          </div>
+        </div>
       </div>
 
 
@@ -80,6 +208,12 @@
       <div v-if="!userData && loading" class="mt-6 text-center">
         <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
         <p class="mt-2 text-sm text-gray-500">Загрузка данных...</p>
+      </div>
+      
+      <div class="bg-black text-white text-sm">
+        {{selectedFeelsPositive}}
+        <div class="border"></div>
+        {{selectedFeelsNegative}}
       </div>
 
       
@@ -141,6 +275,18 @@ const loading = ref(true)
 const saving = ref(false)
 const canceling = ref(false)
 const errorMessage = ref('')
+
+
+// переменные для аккордиона
+const isPositiveOpen = ref(false)
+const isNegativeOpen = ref(false)
+const selectedFeelsPositive = ref([])
+const selectedFeelsNegative = ref([])
+
+const PositiveMap = ['Азарт', 'Антиципация', 'Безмятежность', 'Безопасность', 'Благодарность', 'Блаженство', 'Вдохновение', 'Вера', 'Верность', 'Взаимовыручка', 'Влечение', 'Возбуждение', 'Воодушевление', 'Восхищение', 'Восторг', 'Гармония', 'Гордость', 'Доверие', 'Довольство', 'Доброта', 'Дружелюбие', 'Жизнерадостность', 'Жизнелюбие', 'Забота', 'Защищенность', 'Здравомыслие', 'Искренность', 'Комфорт', 'Кураж', 'Любовь', 'Любовь к себе', 'Надежда', 'Нежность', 'Одобрение', 'Одухотворенность', 'Оживление', 'Озарение', 'Окрыленность', 'Оптимизм', 'Освобождение', 'Очарованность', 'Привязанность', 'Признательность', 'Принятие', 'Приподнятость', 'Прозрение', 'Радость', 'Самодовольство', 'Самоценность', 'Симпатия', 'Сопереживание', 'Сопричастность', 'Спокойствие', 'Счастье', 'Теплота', 'Триумф', 'Уверенность', 'Увлеченность', 'Удовлетворение', 'Удовольствие', 'Умиротворение', 'Уравновешенность', 'Уважение', 'Энтузиазм', 'Экстаз' ]
+const NePositiveMap = ['Апатия', 'Безвыходность', 'Безразличие', 'Безысходность', 'Беспомощность', 'Бессилие', 'Бешенство', 'Боязнь', 'Вина', 'Враждебность', 'Вредность', 'Высокомерие', 'Гнев', 'Горе', 'Горечь', 'Грусть', 'Досада', 'Душевная боль', 'Заброшенность', 'Зависть', 'Загнанность', 'Замешательство', 'Застенчивость', 'Злость', 'Изнеможение', 'Изоляция', 'Истерия', 'Испуг', 'Истощение', 'Лень', 'Меланхолия', 'Муки', 'Надменность', 'Недовольство', 'Ненависть', 'Неловкость', 'Неопределённость', 'Неприязнь', 'Неполноценность', 'Неуверенность', 'Нервозность', 'Ностальгия', 'Обида', 'Огорчение', 'Одиночество', 'Омерзение', 'Опасение', 'Отвращение', 'Отчаяние', 'Отчуждение', 'Отчуждённость', 'Оцепенение', 'Ошарашенность', 'Ошеломлённость', 'Паника', 'Печаль', 'Подавленность', 'Покинутость', 'Презрение', 'Презрение к себе', 'Пренебрежение', 'Разбитость', 'Раздвоение', 'Раздражение', 'Разочарование', 'Равнодушие', 'Раскаяние', 'Растерянность', 'Ревность', 'Робость', 'Скука', 'Сломленность', 'Смущение', 'Смятение', 'Собственничество', 'Сожаление', 'Сомнение', 'Скорбь', 'Страдание', 'Страх', 'Стыд', 'Терзания', 'Томление', 'Тоска', 'Тревога', 'Угнетенность', 'Угрызения совести', 'Удрученность', 'Унижение', 'Уныние', 'Упадок духа', 'Усталость', 'Ужас', 'Уязвлённость', 'Холодность', 'Ярость' ]
+
+
 
 
 
@@ -246,7 +392,24 @@ const saveAction = async () => {
   errorMessage.value = ''
   
   try {
-    await sendMessageToChat('save')
+
+    let messageText = 'save'
+    
+    if (selectedFeelsPositive.value.length > 0) {
+      messageText += '\n\n📈 Положительные чувства:'
+      selectedFeelsPositive.value.forEach(feeling => {
+        messageText += `\n✓ ${feeling}`
+      })
+    }
+    
+    if (selectedFeelsNegative.value.length > 0) {
+      messageText += '\n\n📉 Не позитивные чувства:'
+      selectedFeelsNegative.value.forEach(feeling => {
+        messageText += `\n✗ ${feeling}`
+      })
+    }
+
+    await sendMessageToChat(messageText)
     
     // Закрываем WebApp после успешной отправки
     const tg = window.Telegram?.WebApp

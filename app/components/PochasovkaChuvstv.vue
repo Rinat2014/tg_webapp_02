@@ -397,16 +397,16 @@ const saveAction = async () => {
     let messageText = ''
     
     if (selectedFeelsPositive.value.length > 0) {
-      messageText += '\n\n🟢🟢🟢\n`Позитивные чувства:`'
+      messageText += '\n\n🟢🟢🟢\n **Позитивные чувства:**'
       selectedFeelsPositive.value.forEach(feeling => {
-        messageText += `\n ${feeling}`
+        messageText += `\n  ${feeling}`
       })
     }
     
     if (selectedFeelsNegative.value.length > 0) {
-      messageText += '\n\n🔴🔴🔴\n`Не позитивные чувства:`'
+      messageText += '\n\n🔴🔴🔴\n **Не позитивные чувства:**'
       selectedFeelsNegative.value.forEach(feeling => {
-        messageText += `\n ${feeling}`
+        messageText += `\n  ${feeling}`
       })
     }
 

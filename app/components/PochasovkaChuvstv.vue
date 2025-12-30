@@ -34,7 +34,7 @@
 
       
       <!-- Кнопки сохранения и отмены -->
-      <div class="grid grid-cols-2 gap-3 my-4">
+      <div class="grid grid-cols-1 gap-2 my-4">
         <button
           @click="saveAction"
           :disabled="saving"
@@ -47,7 +47,7 @@
           </span>
         </button>
         
-        <button
+        <!-- <button
           @click="cancelAction"
           :disabled="canceling"
           class="flex-1 bg-red-500 hover:bg-red-600 disabled:bg-red-300 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
@@ -58,7 +58,7 @@
             Отменяем...
           </span>
           
-        </button>
+        </button> -->
       </div>
 
       <!-- Позитивный аккордеон  -->
@@ -210,11 +210,11 @@
         <p class="mt-2 text-sm text-gray-500">Загрузка данных...</p>
       </div>
       
-      <div class="bg-black text-white text-sm">
+      <!-- <div class="bg-black text-white text-sm">
         {{selectedFeelsPositive}}
         <div class="border"></div>
         {{selectedFeelsNegative}}
-      </div>
+      </div> -->
 
       
 
@@ -397,16 +397,16 @@ const saveAction = async () => {
     let messageText = ''
     
     if (selectedFeelsPositive.value.length > 0) {
-      messageText += '\n\n`Позитивные чувства:`'
+      messageText += '\n\n`🟢🟢🟢`\n\n`Позитивные чувства:`'
       selectedFeelsPositive.value.forEach(feeling => {
-        messageText += `\n🟢 ${feeling}`
+        messageText += `\n ${feeling}`
       })
     }
     
     if (selectedFeelsNegative.value.length > 0) {
-      messageText += '\n\n`Не позитивные чувства:`'
+      messageText += '\n\n`🔴🔴🔴`\n\n`Не позитивные чувства:`'
       selectedFeelsNegative.value.forEach(feeling => {
-        messageText += `\n🔴 ${feeling}`
+        messageText += `\n ${feeling}`
       })
     }
 
@@ -434,7 +434,7 @@ const cancelAction = async () => {
   errorMessage.value = ''
   
   try {
-    await sendMessageToChat('cancel')
+    await sendMessageToChat('Отмена')
     
     // Закрываем WebApp после успешной отправки
     const tg = window.Telegram?.WebApp

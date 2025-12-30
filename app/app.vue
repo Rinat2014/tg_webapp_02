@@ -3,7 +3,7 @@
     <MainNav />
   </div>
   <div>
-    <NuxtPage />
+    <NuxtPage class="mb-20" />
   </div>
 </template>
 

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <!-- <MainNav /> -->
+    <MainNav />
   </div>
   <div>
     <NuxtPage class="mb-20" />

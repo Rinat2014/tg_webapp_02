@@ -1,6 +1,6 @@
 <template>
 <div>
-   <PochasovkaChuvstv />
-   <!-- <h1 class="text-center text-4xl p-4 bg-yellow-200">Index page</h1> -->
+   <h1 class="text-center text-4xl p-4 bg-green-200 text-green-700">Index page</h1>
+   <!-- <PochasovkaChuvstv /> -->
 </div>
 </template>

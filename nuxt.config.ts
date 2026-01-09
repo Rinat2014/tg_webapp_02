@@ -19,7 +19,7 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
     server: {
-      // allowedHosts: ['.ngrok-free.app'], // ngrok testing
+      allowedHosts: ['.ngrok-free.app'], // ngrok testing
     }
   },
 

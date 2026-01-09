@@ -2,9 +2,9 @@
   <div class="flex items-center justify-center p-4">
     <div class="w-full  ">
 
-      <div class="flex justify-start items-center gap-2 bg-blue-300/10 p-2 rounded-xl shadow-md">
+      <div class="flex justify-center items-center gap-2 bg-blue-300/10 p-2 rounded-xl shadow-md">
         <!-- Аватар -->
-        <div class="flex justify-center">
+        <!-- <div class="flex justify-center">
           <div class="relative">
             <img 
               v-if="userData?.photo_url"
@@ -21,28 +21,47 @@
           </div>
         </div>
   
-        <!-- Username + ID -->
+        
         <div class="">          
           <p class="text-xl font-semibold text-gray-800 dark:text-gray-200">{{ userData?.username ? `@${userData.username}` : 'UserName' }}</p>
           <p class="font-mono text-gray-500 dark:text-gray-400">{{ userData?.id ? `ID: ${userData?.id}` : 'Telegram ID' }}</p>
-          <!-- <p class="dark:after:content-['dark'] after:content-['light']"></p> -->
-        </div>
+          <p class="dark:after:content-['dark'] after:content-['light']"></p>
+        </div> -->
   
-        
+        <div class="dark:text-white">Users</div>
 
       </div>
 
       <div 
-        class="w-full bg-black p-1 m-1"
+        class="w-full p-2 my-2 dark:bg-black/20 border dark:border-gray-200 dark:text-gray-100 rounded"
         v-for="userClient in clients" :key="userClient">
 
-        <div class="w-full bg-black/20 border dark:border-gray-200 dark:text-gray-100">
-          <div class="">{{ userClient.username }}</div>
-          <div class="">{{ userClient.server }}</div>
-          <div class="">{{ userClient.oplata }}</div>
+        <div class="">
+          <div class="flex gap-4 justify-between">
+            <div>{{ userClient.username }}</div>
+            <div>{{ userClient.server }}</div>
+          </div>
+          
+          
+          <!-- oplata -->
+          <div class="flex text-sm justify-between items-center">
+            <div               
+              v-for="(mes, index) in userClient.oplata">
+              <div 
+                class="cursor-pointer" 
+                
+                :class="{
+                  'text-gray-500': mes == false,
+                  'text-green-500': mes == true,
+                  'font-bold text-xl': index == currentMonth,
+                }"
+                >
+                {{ index }}
+              </div>
+            </div>
+          </div>
 
         </div>
-
       </div>
 
 
@@ -160,8 +179,11 @@ const isNegativeOpen = ref(false)
 const selectedFeelsPositive = ref([])
 const selectedFeelsNegative = ref([])
 
-const PositiveMap = ['Азарт', 'Антиципация', 'Безмятежность', 'Безопасность', 'Благодарность', 'Блаженство', 'Вдохновение', 'Вера', 'Верность', 'Взаимовыручка', 'Влечение', 'Возбуждение', 'Воодушевление', 'Восхищение', 'Восторг', 'Гармония', 'Гордость', 'Доверие', 'Довольство', 'Доброта', 'Дружелюбие', 'Жизнерадостность', 'Жизнелюбие', 'Забота', 'Защищенность', 'Здравомыслие', 'Искренность', 'Комфорт', 'Кураж', 'Любовь', 'Любовь к себе', 'Надежда', 'Нежность', 'Одобрение', 'Одухотворенность', 'Оживление', 'Озарение', 'Окрыленность', 'Оптимизм', 'Освобождение', 'Очарованность', 'Привязанность', 'Признательность', 'Принятие', 'Приподнятость', 'Прозрение', 'Радость', 'Самодовольство', 'Самоценность', 'Симпатия', 'Сопереживание', 'Сопричастность', 'Спокойствие', 'Счастье', 'Теплота', 'Триумф', 'Уверенность', 'Увлеченность', 'Удовлетворение', 'Удовольствие', 'Умиротворение', 'Уравновешенность', 'Уважение', 'Энтузиазм', 'Экстаз' ]
-const NePositiveMap = ['Апатия', 'Безвыходность', 'Безразличие', 'Безысходность', 'Беспомощность', 'Бессилие', 'Бешенство', 'Боязнь', 'Вина', 'Враждебность', 'Вредность', 'Высокомерие', 'Гнев', 'Горе', 'Горечь', 'Грусть', 'Досада', 'Душевная боль', 'Заброшенность', 'Зависть', 'Загнанность', 'Замешательство', 'Застенчивость', 'Злость', 'Изнеможение', 'Изоляция', 'Истерия', 'Испуг', 'Истощение', 'Лень', 'Меланхолия', 'Муки', 'Надменность', 'Недовольство', 'Ненависть', 'Неловкость', 'Неопределённость', 'Неприязнь', 'Неполноценность', 'Неуверенность', 'Нервозность', 'Ностальгия', 'Обида', 'Огорчение', 'Одиночество', 'Омерзение', 'Опасение', 'Отвращение', 'Отчаяние', 'Отчуждение', 'Отчуждённость', 'Оцепенение', 'Ошарашенность', 'Ошеломлённость', 'Паника', 'Печаль', 'Подавленность', 'Покинутость', 'Презрение', 'Презрение к себе', 'Пренебрежение', 'Разбитость', 'Раздвоение', 'Раздражение', 'Разочарование', 'Равнодушие', 'Раскаяние', 'Растерянность', 'Ревность', 'Робость', 'Скука', 'Сломленность', 'Смущение', 'Смятение', 'Собственничество', 'Сожаление', 'Сомнение', 'Скорбь', 'Страдание', 'Страх', 'Стыд', 'Терзания', 'Томление', 'Тоска', 'Тревога', 'Угнетенность', 'Угрызения совести', 'Удрученность', 'Унижение', 'Уныние', 'Упадок духа', 'Усталость', 'Ужас', 'Уязвлённость', 'Холодность', 'Ярость' ]
+// const PositiveMap = ['Азарт', 'Антиципация', 'Безмятежность', 'Безопасность', 'Благодарность', 'Блаженство', 'Вдохновение', 'Вера', 'Верность', 'Взаимовыручка', 'Влечение', 'Возбуждение', 'Воодушевление', 'Восхищение', 'Восторг', 'Гармония', 'Гордость', 'Доверие', 'Довольство', 'Доброта', 'Дружелюбие', 'Жизнерадостность', 'Жизнелюбие', 'Забота', 'Защищенность', 'Здравомыслие', 'Искренность', 'Комфорт', 'Кураж', 'Любовь', 'Любовь к себе', 'Надежда', 'Нежность', 'Одобрение', 'Одухотворенность', 'Оживление', 'Озарение', 'Окрыленность', 'Оптимизм', 'Освобождение', 'Очарованность', 'Привязанность', 'Признательность', 'Принятие', 'Приподнятость', 'Прозрение', 'Радость', 'Самодовольство', 'Самоценность', 'Симпатия', 'Сопереживание', 'Сопричастность', 'Спокойствие', 'Счастье', 'Теплота', 'Триумф', 'Уверенность', 'Увлеченность', 'Удовлетворение', 'Удовольствие', 'Умиротворение', 'Уравновешенность', 'Уважение', 'Энтузиазм', 'Экстаз' ]
+// const NePositiveMap = ['Апатия', 'Безвыходность', 'Безразличие', 'Безысходность', 'Беспомощность', 'Бессилие', 'Бешенство', 'Боязнь', 'Вина', 'Враждебность', 'Вредность', 'Высокомерие', 'Гнев', 'Горе', 'Горечь', 'Грусть', 'Досада', 'Душевная боль', 'Заброшенность', 'Зависть', 'Загнанность', 'Замешательство', 'Застенчивость', 'Злость', 'Изнеможение', 'Изоляция', 'Истерия', 'Испуг', 'Истощение', 'Лень', 'Меланхолия', 'Муки', 'Надменность', 'Недовольство', 'Ненависть', 'Неловкость', 'Неопределённость', 'Неприязнь', 'Неполноценность', 'Неуверенность', 'Нервозность', 'Ностальгия', 'Обида', 'Огорчение', 'Одиночество', 'Омерзение', 'Опасение', 'Отвращение', 'Отчаяние', 'Отчуждение', 'Отчуждённость', 'Оцепенение', 'Ошарашенность', 'Ошеломлённость', 'Паника', 'Печаль', 'Подавленность', 'Покинутость', 'Презрение', 'Презрение к себе', 'Пренебрежение', 'Разбитость', 'Раздвоение', 'Раздражение', 'Разочарование', 'Равнодушие', 'Раскаяние', 'Растерянность', 'Ревность', 'Робость', 'Скука', 'Сломленность', 'Смущение', 'Смятение', 'Собственничество', 'Сожаление', 'Сомнение', 'Скорбь', 'Страдание', 'Страх', 'Стыд', 'Терзания', 'Томление', 'Тоска', 'Тревога', 'Угнетенность', 'Угрызения совести', 'Удрученность', 'Унижение', 'Уныние', 'Упадок духа', 'Усталость', 'Ужас', 'Уязвлённость', 'Холодность', 'Ярость' ]
+
+
+const currentMonth = 1
 
 
 
@@ -173,41 +195,368 @@ const NePositiveMap = ['Апатия', 'Безвыходность', 'Безра
 
 
 
-
-
-
-const clients = [
+const clients = ref([
   {
     username: "username-1",
     server: "V1",
-    oplata: true
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
   },
   {
     username: "username-2",
     server: "V1",
-    oplata: true
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
   },
   {
     username: "username-3",
     server: "V2",
-    oplata: false
+    oplata: {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
   },
   {
     username: "username-4",
     server: "V2",
-    oplata: false
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
   },
   {
     username: "username-5",
     server: "V3",
-    oplata: true
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
   },
   {
     username: "username-6",
     server: "V3",
-    oplata: false
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
   },
-]
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "username-6",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  }
+])
 
 
 

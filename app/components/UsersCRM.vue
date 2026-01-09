@@ -10,11 +10,11 @@
               v-if="userData?.photo_url"
               :src="userData.photo_url" 
               :alt="userData.username || 'User'"
-              class="w-24 h-24 rounded-full border-4 border-white shadow-lg"
+              class="w-16 h-16 rounded-full border-4 border-white shadow-lg"
             />
             <div 
               v-else
-              class="w-24 h-24 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold"
+              class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold"
             >
               {{ userInitials }}
             </div>

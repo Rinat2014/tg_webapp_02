@@ -36,10 +36,10 @@
         class="w-full bg-black p-1 m-1"
         v-for="userClient in clients" :key="userClient">
 
-        <div class="w-full bg-black/70 border">
-          <div>{{ userClient.username }}</div>
-          <div>{{ userClient.server }}</div>
-          <div>{{ userClient.oplata }}</div>
+        <div class="w-full bg-black/70 border dark:border-black/10 dark:text-gray-500">
+          <div class="">{{ userClient.username }}</div>
+          <div class="">{{ userClient.server }}</div>
+          <div class="">{{ userClient.oplata }}</div>
 
         </div>
 

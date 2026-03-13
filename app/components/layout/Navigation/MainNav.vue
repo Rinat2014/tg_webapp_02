@@ -5,6 +5,12 @@
     <!-- <li><NuxtLink  class="text-white hover:bg-blue-500/40   dark:text-white dark:hover:bg-blue  p-5 rounded" to="/crm">CRM</NuxtLink></li> -->
     <li><NuxtLink  class="text-white hover:bg-blue-500   dark:hover:bg-blue  p-5 rounded" to="/user">User</NuxtLink></li>
     <li><NuxtLink  class="text-white hover:bg-blue-500   dark:hover:bg-blue  p-5 rounded" to="/pochasovka">Pocha</NuxtLink></li>
+    <li><ThemeSwitcher class="text-white hover:bg-blue-500   dark:hover:bg-blue  p-5 rounded" /></li>
   </ul>
 </div>
 </template>
+
+
+<script setup>
+
+</script>

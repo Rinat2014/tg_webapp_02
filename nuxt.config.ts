@@ -4,6 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
+  modules: [
+    '@nuxtjs/color-mode',
+    // '@pinia/nuxt', 
+    // '@nuxtjs/i18n',
+    // '@nuxt/ui',
+  ],
   
   runtimeConfig: {
     public: {
@@ -28,7 +34,7 @@ export default defineNuxtConfig({
     preset: 'vercel'
   },
 
-  ssr: false,  // SPA
+  // ssr: false,  // SPA
 
   app: {
     baseURL: '/',  

@@ -1,50 +1,68 @@
 <template>
-  <div class="flex items-center justify-center p-4">
-    <div class="w-full  ">
+  <div class="flex items-center justify-center p-4 dark:bg-gray-800 bg-white">
+    <div class="w-full">
 
-      <div class="flex justify-center items-center gap-2 bg-blue-300/10 p-2 rounded-xl shadow-md">
-        <!-- Аватар -->
-        <!-- <div class="flex justify-center">
-          <div class="relative">
-            <img 
-              v-if="userData?.photo_url"
-              :src="userData.photo_url" 
-              :alt="userData.username || 'User'"
-              class="w-16 h-16 rounded-full border-1 border-white shadow-lg"
-            />
-            <div 
-              v-else
-              class="w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white text-2xl font-bold"
-            >
-              {{ userInitials }}
-            </div>
-          </div>
-        </div>
-  
-        
-        <div class="">          
-          <p class="text-xl font-semibold text-gray-800 dark:text-gray-200">{{ userData?.username ? `@${userData.username}` : 'UserName' }}</p>
-          <p class="font-mono text-gray-500 dark:text-gray-400">{{ userData?.id ? `ID: ${userData?.id}` : 'Telegram ID' }}</p>
-          <p class="dark:after:content-['dark'] after:content-['light']"></p>
-        </div> -->
-  
-        <div class="dark:text-white">Users</div>
-
+      <div class="p-2 mb-4 bg-blue-300/10 rounded shadow-md     flex items-center justify-between">
+        <div class="w-6 text-center cursor-pointer"><</div>
+        <div class="dark:text-white text-center text-xl">Adminka (2026)</div>
+        <div class="w-6 text-center cursor-pointer">></div>
       </div>
 
-      <div 
-        class="w-full p-2 my-2 dark:bg-black/20 border dark:border-gray-200 dark:text-gray-100 rounded"
-        v-for="userClient in clients" :key="userClient">
 
-        <div class="">
-          <div class="flex gap-4 justify-between">
-            <div>{{ userClient.username }}</div>
-            <div>{{ userClient.server }}</div>
-          </div>
+
+
+      <div 
+        class="w-full my-2 cursor-pointer    hover:bg-black/10 dark:hover:bg-black/20 dark:bg-black/50 border dark:border-gray-200 dark:text-gray-100 rounded transition"
+        v-for="(userClient, index) in clients" :key="userClient">
+
+        <div class="text-sm text-center text-gray-400 dark:text-gray-700">{{ index }}</div>
+        <div class="px-2">
+          <NuxtLink :to="`/crm_users/${userClient.username}/profile`">
+            
+            <div class="flex items-center justify-between">
+              <div class="text-xl text-gray-800 dark:text-gray-200">
+                {{ userClient.username }} 
+              </div>
+              
+              <div>{{ userClient.server }}</div>
+            </div>
+            <div class="flex items-center justify-between">
+              <!-- <svg class="size-4 fill-green-500" 
+                xmlns="http://www.w3.org/2000/svg"
+                v-for="month in userClient.oplata"><rect width="100" height="100" /></svg> -->
+              
+              <div
+                v-for="(month, N) in userClient.oplata" >
+                <p 
+                  class="text-xs w-5 text-center"
+                  :class="{'text-green-400 rounded-full' : month }">
+                  *
+                </p>
+                <!-- <p class="text-green-500 bg-green-500/30">{{ month }}</p> -->
+              </div>
+
+              <!-- <svg class="size-4 fill-green-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-green-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-green-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              |
+              <svg class="size-4 fill-green-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-green-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-green-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              |
+              <svg class="size-4 fill-gray-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-gray-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-gray-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              |
+              <svg class="size-4 fill-gray-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-gray-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg>
+              <svg class="size-4 fill-gray-500" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" /></svg> -->
+
+            </div>
+          </NuxtLink>
           
           
           <!-- oplata -->
-          <div class="flex text-sm justify-between items-center">
+          <!-- <div class="flex text-sm justify-between items-center">
             <div               
               v-for="(mes, index) in userClient.oplata">
               <div 
@@ -59,7 +77,7 @@
                 {{ index }}
               </div>
             </div>
-          </div>
+          </div> -->
 
         </div>
       </div>
@@ -183,7 +201,7 @@ const selectedFeelsNegative = ref([])
 // const NePositiveMap = ['Апатия', 'Безвыходность', 'Безразличие', 'Безысходность', 'Беспомощность', 'Бессилие', 'Бешенство', 'Боязнь', 'Вина', 'Враждебность', 'Вредность', 'Высокомерие', 'Гнев', 'Горе', 'Горечь', 'Грусть', 'Досада', 'Душевная боль', 'Заброшенность', 'Зависть', 'Загнанность', 'Замешательство', 'Застенчивость', 'Злость', 'Изнеможение', 'Изоляция', 'Истерия', 'Испуг', 'Истощение', 'Лень', 'Меланхолия', 'Муки', 'Надменность', 'Недовольство', 'Ненависть', 'Неловкость', 'Неопределённость', 'Неприязнь', 'Неполноценность', 'Неуверенность', 'Нервозность', 'Ностальгия', 'Обида', 'Огорчение', 'Одиночество', 'Омерзение', 'Опасение', 'Отвращение', 'Отчаяние', 'Отчуждение', 'Отчуждённость', 'Оцепенение', 'Ошарашенность', 'Ошеломлённость', 'Паника', 'Печаль', 'Подавленность', 'Покинутость', 'Презрение', 'Презрение к себе', 'Пренебрежение', 'Разбитость', 'Раздвоение', 'Раздражение', 'Разочарование', 'Равнодушие', 'Раскаяние', 'Растерянность', 'Ревность', 'Робость', 'Скука', 'Сломленность', 'Смущение', 'Смятение', 'Собственничество', 'Сожаление', 'Сомнение', 'Скорбь', 'Страдание', 'Страх', 'Стыд', 'Терзания', 'Томление', 'Тоска', 'Тревога', 'Угнетенность', 'Угрызения совести', 'Удрученность', 'Унижение', 'Уныние', 'Упадок духа', 'Усталость', 'Ужас', 'Уязвлённость', 'Холодность', 'Ярость' ]
 
 
-const currentMonth = 1
+const currentMonth = 3
 
 
 
@@ -197,14 +215,14 @@ const currentMonth = 1
 
 const clients = ref([
   {
-    username: "username-1",
+    username: "Namaskar",
     server: "V1",
     oplata: {
       1: true,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
+      2: true,
+      3: true,
+      4: true,
+      5: true,
       6: false,
       7: false,
       8: false,
@@ -215,11 +233,11 @@ const clients = ref([
     },
   },
   {
-    username: "username-2",
+    username: "Madagaskar",
     server: "V1",
     oplata: {
       1: true,
-      2: false,
+      2: true,
       3: false,
       4: false,
       5: false,
@@ -233,30 +251,30 @@ const clients = ref([
     },
   },
   {
-    username: "username-3",
-    server: "V2",
-    oplata: {
-      1: false,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false,
-      9: false,
-      10: false,
-      11: false,
-      12: false,
-    },
-  },
-  {
-    username: "username-4",
+    username: "Mantresh",
     server: "V2",
     oplata: {
       1: true,
-      2: false,
-      3: false,
+      2: true,
+      3: true,
+      4: true,
+      5: true,
+      6: true,
+      7: true,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "Satya",
+    server: "V2",
+    oplata: {
+      1: true,
+      2: true,
+      3: true,
       4: false,
       5: false,
       6: false,
@@ -269,7 +287,79 @@ const clients = ref([
     },
   },
   {
-    username: "username-5",
+    username: "Vidya",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: true,
+      3: true,
+      4: true,
+      5: true,
+      6: true,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "User",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: true,
+      4: true,
+      5: true,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: false,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "Andrey",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: true,
+      8: true,
+      9: true,
+      10: true,
+      11: false,
+      12: false,
+    },
+  },
+  {
+    username: "Vasya",
+    server: "V3",
+    oplata: {
+      1: true,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      6: false,
+      7: false,
+      8: false,
+      9: false,
+      10: true,
+      11: true,
+      12: true,
+    },
+  },
+  {
+    username: "Natali",
     server: "V3",
     oplata: {
       1: true,
@@ -296,82 +386,10 @@ const clients = ref([
       4: false,
       5: false,
       6: false,
-      7: false,
-      8: false,
-      9: false,
-      10: false,
-      11: false,
-      12: false,
-    },
-  },
-  {
-    username: "username-6",
-    server: "V3",
-    oplata: {
-      1: true,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false,
-      9: false,
-      10: false,
-      11: false,
-      12: false,
-    },
-  },
-  {
-    username: "username-6",
-    server: "V3",
-    oplata: {
-      1: true,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false,
-      9: false,
-      10: false,
-      11: false,
-      12: false,
-    },
-  },
-  {
-    username: "username-6",
-    server: "V3",
-    oplata: {
-      1: true,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false,
-      9: false,
-      10: false,
-      11: false,
-      12: false,
-    },
-  },
-  {
-    username: "username-6",
-    server: "V3",
-    oplata: {
-      1: true,
-      2: false,
-      3: false,
-      4: false,
-      5: false,
-      6: false,
-      7: false,
-      8: false,
-      9: false,
-      10: false,
+      7: true,
+      8: true,
+      9: true,
+      10: true,
       11: false,
       12: false,
     },

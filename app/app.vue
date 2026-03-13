@@ -2,9 +2,10 @@
   <div>
     <MainNav />
   </div>
-  <div>
+  <div class="">
     <NuxtPage class="mb-20" />
   </div>
+
 </template>
 
 
